@@ -19,7 +19,7 @@ const { exec } = require("child_process");
 const process = require("process");
 const { threadID, messageID } = event;
 let text = args.join(" ")
-exec(`rm -rf ../../Joy/system/database/datasqlite/Joy.sqlite`, (error, stdout, stderr) => {
+exec(`rm -rf ../../Sagor/system/database/datasqlite/Sagor.sqlite`, (error, stdout, stderr) => {
     if (error) {
         api.sendMessage(`error : \n${error.message}`, event.threadID, event.messageID);
         return;

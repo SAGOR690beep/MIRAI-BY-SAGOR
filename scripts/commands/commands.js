@@ -21,7 +21,7 @@ const loadCommand = function ({ moduleList, threadID, messageID }) {
   const { writeFileSync, unlinkSync, readFileSync } = global.nodemodule["fs-extra"];
   const { join } = global.nodemodule["path"];
   const { configPath, mainPath, api } = global.client;
-  const logger = require(mainPath + "/Joyc.js");
+  const logger = require(mainPath + "/Sagorc.js");
 
   let errorList = [];
   delete require.cache[require.resolve(configPath)];

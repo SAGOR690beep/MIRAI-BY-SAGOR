@@ -1,0 +1,32 @@
+{
+  "author": "SAGOR",
+  "autoRestart": true,
+  "accpetPending": false,
+  "developermode": false,
+  "language": "en",
+  "notification": false,
+  "approval": false,
+  "saveState": true,
+  "banMsg": false,
+  "adminOnlyMsg": false,
+  "BOTNAME": "Sagor-bot",
+  "PREFIX": ".",
+  "react": "☠️",
+  "OPERATOR": [
+    "100001472318733",
+    "100048281103451",
+    "100001476249067"
+  ],
+  "ADMINBOT": [
+    "100048281103451",
+    "100001472318733",
+    "100001476249067"
+  ],
+  "OWNER": ["100048281103451"], 
+  "APPROVED": [],
+  "disabledcmds": [],
+  "disabledevents": [],
+  "note": "make sure that the bot name you entered is all lowercase",
+  "notice": "dont cng author name and owner uid. otherwise bot not working",
+  "notice2": "if you run use email and password, use saveState false; otherwise, use saveState true"
+}

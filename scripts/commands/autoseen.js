@@ -24,7 +24,7 @@ if (!fs.existsSync(pathFile))
 
 module.exports. run = async ({ api, event, args }) => {
    try {
-     const logger = require("../../Joy/catalogs/Joyc.js");
+     const logger = require("../../Sagor/catalogs/Sagorc.js");
      if (args[0] == 'on') {
        fs.writeFileSync(pathFile, 'true');
        api.sendMessage('the autoseen function is now enabled for new messages.', event.threadID, event.messageID);

@@ -1,14 +1,14 @@
 {
-    "name": "JOY",
+    "name": "SAGOR",
     "version": "4.0.0",
     "description": "simple messenger bot",
     "main": "",
     "scripts": {
-        "start": "node --trace-warnings --use_strict --async-stack-traces Joy/catalogs/Joya.js",
+        "start": "node --trace-warnings --use_strict --async-stack-traces Sagor/catalogs/Sagora.js",
         "login": "node login",
         "test": "node --trace-warnings --use_strict --async-stack-traces main"
     },
-    "author": "JOY",
+    "author": "SAGOR",
     "license": "GPL-3.0",
     "dependencies": {
         "@distube/ytdl-core": "^4.15.1",
