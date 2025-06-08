@@ -8,7 +8,7 @@
 -   ⚜️ My name is jahidul islam sagor.
 -   ❤️‍🔥 27/sep/2007
 -   💬 My nickname is SaGor (𝚄𝚗𝚒𝚚𝚞𝚎 𝚂𝚝𝚢𝚕𝚎)
--   💬 I'm Single. But I Have a Person in My Heart 💜
+-   💬 I'm Single. But I love the people of my country.💜
 -   💓 Relationship: Single 
 -   🍁 Profile: [Facebook](https://www.facebook.com/SAGOR.DJK.FORYOU)
 -   🍀 Describe About Myself: I'm Full Time Busy Person. I've Continue My Studies. Besides work I write scripts in JavaScript To improve performance of the bot. Thank you for using SaGor bot Version 4
