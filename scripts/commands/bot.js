@@ -1,31 +1,191 @@
-module.exports.config = {
-  name: "bot",
-  version: "0.0.2",
-  permission: 0,
-  prefix: false,
-  credits: "Rahad",
-  description: "fun",
-  category: "admin",
-  usages: "",
-  cooldowns: 5,
-};
+//File created by Mohammad Nayan and fully coded by Nayan
 
-module.exports.run = async function({ api, event, args, Users }) {
-    const axios = require("axios");
-    const request = require("request");
-    const fs = require("fs-extra");
-    const prompt = args.join(" ");
-    var id = event.senderID;
-    var name = await 
-Users.getNameUser(event.senderID);
-    var tl = ["আমি এখন sagor বস এর সাথে বিজি আছি", "what are you asking me to do?", "I love you baby meye hole chipay aso", "Love you 3000-😍💋💝", "ji bolen ki korte pari ami apnar jonno?","আমাকে না ডেকে আমার বস সাগরকে ডাকেন! link: https://www.facebook.com/100048281103451", "Ato daktasen kn bujhlam na 😡", "jan bal falaba,🙂","ask amr mon vlo nei dakben na🙂", "Hmm jan ummah😘😘","jang hanga korba 🙂🖤","iss ato dako keno lojja lage to 🫦🙈","suna tomare amar valo lage,🙈😽","জি তুমি কি আমাকে ডেকেছো 😇🖤🥀","আমাকে আমাকে না ডেকে আমার বসকে ডাকো এই নেও LINK :- https://www.facebook.com/100048281103451","Hmmm sona 🖤 meye hoile kule aso ar sele hoile kule new 🫂😘","Yah This Bot creator : ITS,SAGOR ((S.S))     link => https://www.facebook.com/100048281103451","হা বলো, শুনছি আমি 🤸‍♂️🫂","আহ শোনা আমার আমাকে এতো ডাক্তাছো কেনো আসো বুকে আশো🙈", "তুমি কি আমাকে ডাকলে বন্ধু 🤖?", "I love you 💝", "ভালোবাসি তোমাকে 🤖", "Hi, I'm massanger Bot i can help you.?🤖","Use callad to contact admin!", "Hi, Don't disturb 🤖 🚘Now I'm going to Feni,Bangladesh..bye", "Hi, 🤖 i can help you~~~~"];
-    var rand = tl[Math.floor(Math.random() * tl.length)];
-    if (!prompt) return api.sendMessage(`╭────────────❍\n╰➤ 👤 𝐃𝐞𝐚𝐫 『${name}』,\n╰➤ 🗣️ ${rand}\n╰─────────────────➤`, event.threadID, event.messageID);
-    const res = await axios.get(`https://simsimi.fun/api/v2/?mode=talk&lang=bn&message=${prompt}&filter=true`);
-    console.log(res.data);
-    const respond = res.data.success;
+const axios = require('axios');
 
-    return api.sendMessage({
-        body: respond
-    }, event.threadID, event.messageID);
+module.exports = {
+  config: {
+    name: "bot",
+    version: "1.0.0",
+    permission: 0,
+    credits: "fuck",
+    description: "talk with bot",
+    prefix: 'awto',
+    category: "talk",
+    usages: "hi",
+    cooldowns: 5,
+  },
+
+  handleReply: async function ({ api, event, handleReply }) {
+    try {
+      const response = await axios.get(`http://37.27.114.136:25472/sim?type=ask&ask=${encodeURIComponent(event.body)}`);
+      console.log(response.data);
+      const result = response.data.data.msg;
+
+
+      api.sendMessage(result, event.threadID, (error, info) => {
+        if (error) {
+          console.error('Error replying to user:', error);
+          return api.sendMessage('An error occurred while processing your request. Please try again later.', event.threadID, event.messageID);
+        }
+        global.client.handleReply.push({
+          type: 'reply',
+          name: this.config.name,
+          messageID: info.messageID,
+          author: event.senderID,
+          head: event.body
+        });
+      }, event.messageID);
+
+    } catch (error) {
+      console.error('Error in handleReply:', error);
+      api.sendMessage('An error occurred while processing your request. Please try again later.', event.threadID, event.messageID);
+    }
+  },
+
+
+
+  start: async function ({ nayan, events, args, Users, permission }) {
+    try {
+      const msg = args.join(" ");
+      const userPermission = events.senderID && (await Users.getData(events.senderID)).permission;
+      const admin = global.config.ADMINBOT;
+      const apiData = await axios.get('https://raw.githubusercontent.com/MOHAMMAD-NAYAN/Nayan/main/api.json');
+      const apiUrl = apiData.data.sim;
+
+      if (!msg) {
+        const tl = [
+  "আমি জানি আমাকে পটানো সহজ না,তাই বলে কি তুমি চেষ্টা করবে না.!😒",
+  " আ্ঁমা্ঁকে্ঁ প্ঁছ্ঁন্দ্ঁ না্ঁ হ্ঁলে্ঁ দু্ঁর্ঁত্ব্ঁ ব্ঁজা্ঁয়্ঁ রা্ঁখু্ঁন্ঁ কা্ঁর্ঁন্ঁ আ্ঁমি্ঁ স্ঁবা্ঁর্ঁ ম্ঁতো্ঁ আ্ঁল্ঁগা্ঁ পি্ঁরি্ঁত্ঁ ক্ঁরি্ঁ না্ঁ🖕",
+  "আমারে যে পাবে তার প্রতিদিন ই বিজয় দিবস। 😌",
+  "একটা ভাঙা'চুরা gf চাই_😩💙",
+  "নক দিও, আমিও তোমাকে পছন্দ করি। !!🌚🫶",
+  "যদি 𝙆𝙖𝙧𝙊 সাথে খারাপ আচরণ করে থাকি তাহলে_-𝙞 𝙇𝙤𝙫𝙀 𝙮𝙤𝙐🥺",
+  "আমাকে এতো না ডেকে বস সাগরকে একটা গফ দে 🙄",
+  "তেলাপোকার মতো GF লাগবে জুতার বাড়ি মারলেও যেন উড়ে এসে জরিয়ে ধরে!🙂",
+  "কি জিগাবি জিগা? সব মি'ছা কথা কমু!🙂",
+  "কিসের পড়ালেখা, মাথা নষ্ট; লাগা বিয়া 🥹"
+];
+        var name = await Users.getNameUser(events.senderID);
+        var rand = tl[Math.floor(Math.random() * tl.length)];
+        return nayan.reply({ 
+              body: `╭────────────❍\n╰➤ 👤 𝐃𝐞𝐚𝐫 『${name}』,\n╰➤ 🗣️ ${rand}\n╰─────────────────➤`, 
+              mentions: [{ tag: name, id: events.senderID }] }, events.threadID, (error, info) => {
+          if (error) {
+            return nayan.reply('An error occurred while processing your request. Please try again later.', events.threadID, events.messageID);
+          }
+
+          global.client.handleReply.push({
+            type: 'reply',
+            name: this.config.name,
+            messageID: info.messageID,
+            author: events.senderID,
+            head: msg,
+          });
+        }, events.messageID);
+      } 
+
+        else if (msg.startsWith("delete")) {
+            const userPermission = events.senderID && (await Users.getData(events.senderID)).permission;
+            const admin = global.config.ADMINBOT;
+
+            if (!admin.includes(events.senderID.toString())) {
+                return nayan.reply('You do not have permission to use this command.', events.threadID, events.messageID);
+            }
+
+            const deleteParams = msg.replace("delete", "").trim().split("&");
+            const question = deleteParams[0].replace("ask=", "").trim();
+            const answer = deleteParams[1].replace("ans=", "").trim();
+
+            const response = await axios.get(`${apiUrl}/sim?type=delete&ask=${encodeURIComponent(question)}&ans=${encodeURIComponent(answer)}`);
+            const replyMessage = response.data.msg || response.data.data.msg;
+
+            return nayan.reply({ body: replyMessage }, events.threadID, events.messageID);
+        }
+      else if (msg.startsWith("info")) {
+        const response = await axios.get(`${apiUrl}/sim?type=info`);
+        const totalAsk = response.data.data.totalKeys;
+        const totalAns = response.data.data.totalResponses;
+
+        return nayan.reply({ body: `Total Ask: ${totalAsk}\nTotal Answer: ${totalAns}` }, events.threadID, events.messageID);
+      } 
+      else if (msg.startsWith("teach")) {
+        const teachParams = msg.replace("teach", "").trim().split("&");
+        const question = teachParams[0].replace("ask=", "").trim();
+        const answer = teachParams[1].replace("ans=", "").trim();
+
+        const response = await axios.get(`${apiUrl}/sim?type=teach&ask=${encodeURIComponent(question)}&ans=${encodeURIComponent(answer)}`);
+        const replyMessage = response.data.msg;
+        const ask = response.data.data.ask;
+        const ans = response.data.data.ans;
+        if (replyMessage.includes("already")){
+          return nayan.reply(`📝Your Data Already Added To Database\n1️⃣ASK: ${ask}\n2️⃣ANS: ${ans}`, events.threadID, events.messageID)
+        }
+
+        return nayan.reply({ body: `📝Your Data Added To Database Successfully\n1️⃣ASK: ${ask}\n2️⃣ANS: ${ans}` }, events.threadID, events.messageID);
+      }
+      else if (msg.startsWith("askinfo")) {
+        const question = msg.replace("askinfo", "").trim();
+
+        if (!question) {
+          return nayan.reply('Please provide a question to get information about.', events.threadID, events.messageID);
+        }
+
+        const response = await axios.get(`${apiUrl}/sim?type=keyinfo&ask=${encodeURIComponent(question)}`);
+        const replyData = response.data.data;
+        const answers = replyData.answers;
+
+        if (!answers || answers.length === 0) {
+          return nayan.reply(`No information available for the question: "${question}"`, events.threadID, events.messageID);
+        }
+
+        const replyMessage = `Info for "${question}":\n\n` +
+          answers.map((answer, index) => `📌 ${index + 1}. ${answer}`).join("\n") +
+          `\n\nTotal answers: ${answers.length}`;
+
+        return nayan.reply({ body: replyMessage }, events.threadID, events.messageID);
+      }
+      else if (msg.startsWith("help")) {
+        const cmd = this.config.name;
+        const prefix = global.config.PREFIX;
+        const helpMessage = `
+        🌟 **Available Commands:**
+
+        1. 🤖 ${prefix}${cmd} askinfo [question]: Get information about a specific question.
+
+        2. 📚 ${prefix}${cmd} teach ask=[question]&ans=[answer]: Teach the bot a new question and answer pair.
+
+        3. ❌ ${prefix}${cmd} delete ask=[question]&ans=[answer]: Delete a specific question and answer pair. (Admin only)
+
+        4. 📊 ${prefix}${cmd} info: Get the total number of questions and answers.
+
+        5. 👋 ${prefix}${cmd} hi: Send a random greeting.
+
+        ⚡ Use these commands to interact with the bot effectively!
+            `;
+
+        return nayan.reply({ body: helpMessage }, events.threadID, events.messageID);
+      }
+      else {
+        const response = await axios.get(`${apiUrl}/sim?type=ask&ask=${encodeURIComponent(msg)}`);
+        const replyMessage = response.data.data.msg;
+
+        nayan.reply({ body: replyMessage }, events.threadID, (error, info) => {
+          if (error) {
+            return nayan.reply('An error occurred while processing your request. Please try again later.', events.threadID, events.messageID);
+          }
+
+          global.client.handleReply.push({
+            type: 'reply',
+            name: this.config.name,
+            messageID: info.messageID,
+            author: events.senderID,
+            head: msg,
+          });
+        }, events.messageID);
+      }
+    } catch (error) {
+      console.log(error);
+      nayan.reply('An error has occurred, please try again later.', events.threadID, events.messageID);
+    }
+  }
 };
